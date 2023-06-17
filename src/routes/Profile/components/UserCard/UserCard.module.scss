@@ -1,0 +1,35 @@
+
+.block {
+  border: 1px solid black;
+  width: 300px;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+
+  .photo_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .photo {
+      border: 1px solid black;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+
+    }
+
+    .settings_block {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  .field {
+    display: flex;
+    justify-content: space-between;
+  }
+
+}

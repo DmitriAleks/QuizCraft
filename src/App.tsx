@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import {Root} from "./routes/Root";
 import {BrowserRouter} from "react-router-dom";
 import {RootStoreContext} from "./store/root-store-context";

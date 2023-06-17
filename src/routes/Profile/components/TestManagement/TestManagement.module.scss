@@ -1,0 +1,22 @@
+@import './../../../../styles/sass/variables';
+
+.block {
+  border: 1px solid black;
+  width: 100%;
+  align-items: center;
+  background: linear-gradient(to top, #55EFCB 0%, #5BCAFF 100%);
+
+  .tests_list_wrapper {
+    padding: 20px 20px;
+
+
+    .tests_list {
+      display: flex;
+      flex-direction: column;
+      background-color: $white_1;
+      padding: 10px 20px;
+      border-radius: 12px;
+
+    }
+  }
+}

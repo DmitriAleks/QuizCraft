@@ -16,11 +16,11 @@ const {auth} = useStores()
 
 
     const navigate = useNavigate()
-    useEffect(()=>{
-        console.log(auth.isAuth)
-        if(auth.isAuth)
-        navigate("/blogs")
-    }, [auth.isAuth])
+    // useEffect(()=>{
+    //     console.log(auth.isAuth)
+    //     if(auth.isAuth)
+    //     navigate("/blogs")
+    // }, [auth.isAuth])
     return (
         <div>
                 <Routes>
