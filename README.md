@@ -1,0 +1,1 @@
+гайд по mobX - https://www.youtube.com/watch?v=Rq-sIE2ceEU
