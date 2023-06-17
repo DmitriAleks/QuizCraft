@@ -1,5 +1,5 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Blogs} from "./Blogs/Blogs";
+import { Route, Routes} from "react-router-dom";
+import {Test} from "./Test/Test";
 import {Login} from "./Login/Login";
 import {ErrorPage} from "./ErrorPage/ErrorPage";
 import {Profile} from "./Profile/Profile";
@@ -25,7 +25,7 @@ const {auth} = useStores()
         <div>
                 <Routes>
                     <Route path="/" element={<Login/>}/>
-                    <Route path="blogs" element={<Blogs/>}/>
+                    <Route path="test" element={<Test/>}/>
                     <Route path="profile" element={<Profile/>}/>
                     <Route path="*" element={<ErrorPage/>}/>
                 </Routes>
