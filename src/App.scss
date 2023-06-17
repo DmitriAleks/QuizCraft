@@ -2,4 +2,5 @@
 @import "src/styles/sass/mixins";
 .App {
   @include container();
+  background: linear-gradient(to top, #55EFCB 0%, #5BCAFF 100%);
 }

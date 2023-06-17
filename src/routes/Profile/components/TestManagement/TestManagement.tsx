@@ -24,11 +24,15 @@ const testDataTestsList = [
     }
 ]
 
+type TestManagementPropsType = {
+    showModal: () => void
+}
 
-export const TestManagement = () => {
 
+export const TestManagement = (props:TestManagementPropsType) => {
+const {showModal} = props
     const openModal = () => {
-
+        showModal()
     }
 
     const testsList = testDataTestsList.map(it => {
