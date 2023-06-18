@@ -1,12 +1,26 @@
 
-
 .block {
-  display: flex;
-  .question_block{
-background-color: red;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-column-gap: 6px;
+  padding: 10px 0;
+  height: 100%;
+
+  .questions_block {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+
+    .textarea{
+      height: 100px;
+      resize: none;
+      padding: 8px;
+    }
   }
 
-  .answers_block{
-    background-color: green;
+  .answers_block {
+    height: 100%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
   }
 }
