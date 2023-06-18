@@ -1,0 +1,36 @@
+
+.block {
+  border: 1px solid black;
+  padding: 4px 10px;
+  margin: 2px 0;
+  display: grid;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+
+  &:hover{
+    cursor: pointer;
+    background-color: lightgray;
+  }
+
+  .number{
+
+  }
+
+  .question {
+
+
+
+  }
+
+  .answer {
+
+  }
+  .buttons {
+    display: flex;
+
+  }
+
+}
