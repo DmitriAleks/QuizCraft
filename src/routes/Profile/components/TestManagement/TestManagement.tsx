@@ -3,6 +3,9 @@ import style from './TestManagement.module.scss';
 import {TestItem} from "../TestItem/TestItem";
 import {Buffer} from "buffer";
 import {Button} from "../../../../components/Button/Button";
+import {Modal} from "../../../../components/Modal/Modal";
+import {TestEditor} from "../TestEditor/TestEditor";
+import {useState} from "react";
 
 
 const testDataTestsList = [
@@ -25,15 +28,12 @@ const testDataTestsList = [
 ]
 
 type TestManagementPropsType = {
-    showModal: () => void
+
 }
 
 
 export const TestManagement = (props:TestManagementPropsType) => {
-const {showModal} = props
-    const openModal = () => {
-        showModal()
-    }
+    const [isShowModal, setIsShowModal] = useState(false)
 
     const testsList = testDataTestsList.map(it => {
         return <TestItem id={it.id} title={it.name} onClick={()=>{
@@ -44,12 +44,21 @@ const {showModal} = props
     return (
         <div className={style.block}>
             <h1>Ваши тесты</h1>
-            <Button name='Создать тест' onClick={openModal}/>
+            <Button name='Создать тест' onClick={()=> setIsShowModal(true)}/>
             <div className={style.tests_list_wrapper}>
                 <div className={style.tests_list}>
                     {testsList}
                 </div>
             </div>
+            <Modal title='Создание теста'
+                   isShowModal={isShowModal}
+                   onOk={() => {
+                   }}
+                   onCancel={() => {
+                       setIsShowModal(false)
+                   }}
+                   children={<TestEditor/>}
+            />
         </div>
     )
 }

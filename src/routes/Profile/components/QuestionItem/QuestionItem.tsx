@@ -1,7 +1,7 @@
 //@ts-ignore
 import style from './QuestionItem.module.scss';
-import {questionType} from "../TestEditor/TestEditor";
 import {Tooltip} from "../../../../components/Toolpit/Tooltip";
+import {questionType} from "../../../../types/test-type";
 
 export const QuestionItem = ({ question, questionNumber, answers}:questionType) => {
     const answerTest = answers.map(it => it.answer).join('/')

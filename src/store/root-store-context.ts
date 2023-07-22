@@ -8,7 +8,7 @@ export const useStores = () => {
     const context = useContext(RootStoreContext)
 
     if(context === null ) {
-        throw new Error('e,kfy')
+        throw new Error('всё пизда сломался контекст ')
     }
 
     return context

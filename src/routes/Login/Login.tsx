@@ -3,6 +3,7 @@ import React from "react";
 import {observer} from "mobx-react-lite";
 
 import {useStores} from "../../store/root-store-context";
+import {log} from "util";
 
 
 
@@ -19,7 +20,7 @@ export const Login = observer(() => {
         // @ts-ignore
         auth.baseAuth(login, password)
     }
-
+    console.log('test12312', auth)
 
     return (
         <div>
@@ -30,8 +31,7 @@ export const Login = observer(() => {
             }}>
                 <input type="text" name='login' value={"AlehLop12"}/>
                 <input type="text" name='password' value={"12345612"}/>
-                <button onClick={() => {
-                }}>
+                <button>
                     Войти
                 </button>
             </form>

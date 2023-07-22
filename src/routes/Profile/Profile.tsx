@@ -8,8 +8,7 @@ import {TestEditor} from "./components/TestEditor/TestEditor";
 
 
 export const Profile = () => {
-    const [isShowModal, setIsShowModal] = useState(false)
-    const showModal = () => setIsShowModal(!isShowModal)
+
 
     return (
         <div className={style.block}>
@@ -18,19 +17,8 @@ export const Profile = () => {
             </div>
             <div className={style.content}>
                 <div className={style.header}>HEADER</div>
-                <TestManagement showModal={() => {
-                    showModal()
-                }}/>
+                <TestManagement />
             </div>
-            <Modal title='Создание теста'
-                   isShowModal={isShowModal}
-                   onOk={() => {
-                   }}
-                   onCancel={() => {
-                       setIsShowModal(false)
-                   }}
-                   children={<TestEditor/>}
-            />
         </div>
     )
 }

@@ -5,27 +5,27 @@ import {TestsList} from "../TestsList/TestsList";
 import {Checkbox} from "../../../../components/Checkbox/Checkbox";
 import {Textarea} from "../../../../components/Textarea/Textarea";
 import {Input} from "../../../../components/Input/Input";
+import {questionType, answersType} from "../../../../types/test-type";
+import {useStores} from "../../../../store/root-store-context";
 
-type answersType = {
-    answer: string,
-    id: string
-}
 
-export type questionType = {
-    questionNumber: string
-    question: string,
-    id: string,
-    answers: answersType[]
-}
+
 
 export const TestEditor = () => {
+    const {testManagement} = useStores()
     const [question, setQuestion] = useState<string>('')
-    const [questions, setQuestions] = useState<questionType[]>([])
+    const [questions, setQuestions] = useState<any>([])
     const [answers, setAnswers] = useState<answersType[]>([{
         answer: '',
         id: Math.random().toString()
     }])
     const [isSameAnswer, setIsSameAnswer] = useState<boolean>(true)
+
+    useEffect(()=>{
+      const tests = testManagement.getInitTest()
+        setQuestions(tests)
+    },[])
+
 
     return (
         <div className={style.block}>
@@ -33,6 +33,7 @@ export const TestEditor = () => {
                 <Textarea value={question} onChange={setQuestion}/>
                 <button onClick={() => {
                     if(!question && answers.filter(it=> it.answer).length) return
+
                     setQuestions([...questions, {
                         question: question,
                         id: questions.length.toString(),

@@ -1,7 +1,7 @@
 //@ts-ignore
 import style from './TestsList.module.scss';
-import {questionType} from "../TestEditor/TestEditor";
 import {QuestionItem} from "../QuestionItem/QuestionItem";
+import {questionType} from "../../../../types/test-type";
 
 
 type TestListPropsType = {
