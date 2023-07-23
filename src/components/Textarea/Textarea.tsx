@@ -4,7 +4,7 @@ import style from "../../routes/Profile/components/TestEditor/TestEditor.module.
 
 type TextareaPropsType = {
     value: string
-    onChange: (v: string) => void
+    onChange?: (v: string) => void
 }
 
 export const Textarea = (props: TextareaPropsType) => {
@@ -14,7 +14,7 @@ export const Textarea = (props: TextareaPropsType) => {
                   placeholder="Введите вопрос"
                   value={value}
                   onChange={(e) => {
-                      onChange(e.currentTarget.value)
+                      onChange &&  onChange(e.currentTarget.value)
                   }}>
               </textarea>
     )

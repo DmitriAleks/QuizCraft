@@ -6,6 +6,7 @@ import {Button} from "../../../../components/Button/Button";
 import {Modal} from "../../../../components/Modal/Modal";
 import {TestEditor} from "../TestEditor/TestEditor";
 import {useState} from "react";
+import {TestEditorContainer} from "../TestEditorContainer/TestEditorContainer";
 
 
 const testDataTestsList = [
@@ -35,6 +36,8 @@ type TestManagementPropsType = {
 export const TestManagement = (props:TestManagementPropsType) => {
     const [isShowModal, setIsShowModal] = useState(false)
 
+
+
     const testsList = testDataTestsList.map(it => {
         return <TestItem id={it.id} title={it.name} onClick={()=>{
             console.log('открыл тест')
@@ -50,15 +53,7 @@ export const TestManagement = (props:TestManagementPropsType) => {
                     {testsList}
                 </div>
             </div>
-            <Modal title='Создание теста'
-                   isShowModal={isShowModal}
-                   onOk={() => {
-                   }}
-                   onCancel={() => {
-                       setIsShowModal(false)
-                   }}
-                   children={<TestEditor/>}
-            />
+            <TestEditorContainer isShowModal={isShowModal} setIsShowModal={setIsShowModal}/>
         </div>
     )
 }

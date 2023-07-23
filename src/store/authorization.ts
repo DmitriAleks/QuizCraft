@@ -1,10 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import axios from "axios";
 
-export interface AuthorizationStore {
-    isAuth: boolean;
-    count: number
-}
 
 
 class Authorization {
