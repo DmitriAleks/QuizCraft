@@ -2,7 +2,7 @@ import {TestEditor} from "../TestEditor/TestEditor";
 import {Modal} from "../../../../components/Modal/Modal";
 import {useEffect, useState} from "react";
 import {useStores} from "../../../../store/root-store-context";
-import {answersType} from "../../../../types/test-type";
+import {answersType, questionType} from "../../../../types/test-type";
 
 type TestEditorContainerPropsType = {
     isShowModal: boolean
@@ -14,13 +14,16 @@ type TestEditorContainerPropsType = {
 export const TestEditorContainer = (props: TestEditorContainerPropsType) => {
     const {isShowModal, setIsShowModal} = props
     const {testManagement} = useStores()
-    const [question, setQuestion] = useState<string>('')
-    const [questions, setQuestions] = useState<any>(testManagement.getInitTest().questions)
-    const [answers, setAnswers] = useState<answersType[]>([{
-        answer: '',
-        id: Math.random().toString()
-    }])
 
+    const [questions, setQuestions] = useState<questionType[]>(testManagement.getInitTest().questions)
+
+
+    const handleDeleteQuestion = (questNum: string) => {
+        const filteredArr = questions.filter(it => it.questionNumber !== questNum)
+        setQuestions(filteredArr.map((it ,idx) => ({
+            ...it, questionNumber: (idx + 1).toString()
+        })))
+    }
 
 
     return <Modal title='Создание теста'
@@ -36,12 +39,9 @@ export const TestEditorContainer = (props: TestEditorContainerPropsType) => {
                      setIsShowModal(false)
                   }}
                   children={<TestEditor
-                      answers={answers}
-                      setAnswers={setAnswers}
                       questions={questions}
                       setQuestions={setQuestions}
-                      question={question}
-                      setQuestion={setQuestion}
+                      handleDeleteQuestion={handleDeleteQuestion}
                   />}
     />
 }

@@ -1,6 +1,7 @@
 import {testType} from "../types/test-type";
 import {makeAutoObservable} from "mobx";
 import axios from "axios";
+import {getInitArrayAnswers} from "../utils/commonFunction";
 
 const initTest: testType = {
     title: 'New test',
@@ -9,10 +10,7 @@ const initTest: testType = {
         questionNumber: '1',
         question: '',
         id: Math.random().toString(),
-        answers: [{
-            answer: '',
-            id: Math.random().toString()
-        }]
+        answers: getInitArrayAnswers()
     }]
 }
 

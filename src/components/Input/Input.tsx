@@ -3,7 +3,6 @@ import style from './Input.module.scss'
 
 
 type InputPropsType = {
-    key: string
     label: string
     value: string
     onChange: (val: string) => void
@@ -11,9 +10,9 @@ type InputPropsType = {
 }
 
 export const Input = (props: InputPropsType) => {
-    const {key, label, value, onChange, onBlur} = props
+    const { label, value, onChange, onBlur} = props
     return (
-        <div key={key}>
+        <div >
             <label>{label}</label>
             <input type="text" value={value} onChange={(e) => {
                 onChange(e.currentTarget.value)

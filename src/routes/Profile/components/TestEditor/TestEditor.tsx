@@ -2,72 +2,72 @@
 import style from './TestEditor.module.scss'
 import {useEffect, useState} from "react";
 import {TestsList} from "../TestsList/TestsList";
-import {Checkbox} from "../../../../components/Checkbox/Checkbox";
 import {Textarea} from "../../../../components/Textarea/Textarea";
-import {Input} from "../../../../components/Input/Input";
 import {questionType, answersType} from "../../../../types/test-type";
+import {AnswersContainer} from "../AnswersContainer/AnswersContainer";
+import { getInitArrayAnswers} from "../../../../utils/commonFunction";
 
 
 type TestEditorPropsType = {
-    answers: answersType[]
-    setAnswers: (val:answersType[])=> void
     questions: questionType[]
-    setQuestions:  (val:questionType[])=> void
-    question: string
-    setQuestion:  (val:any)=> void
+    setQuestions: (val: questionType[]) => void
+    handleDeleteQuestion: (questNum: string) => void
 
 }
 
+
+
 export const TestEditor = (props: TestEditorPropsType) => {
-    const {answers, setAnswers, questions, setQuestions, question, setQuestion} = props
+    const {questions, setQuestions, handleDeleteQuestion} = props
     const [isSameAnswer, setIsSameAnswer] = useState<boolean>(true)
+    const [selectedQuest, setSelectedQuest] = useState('1')
+    const [question, setQuestion] = useState<string>(questions.find(it => it.questionNumber === selectedQuest)?.question || '')
+    const [answers, setAnswers] = useState<answersType[]>(getInitArrayAnswers())
+
+    useEffect(() => {
+        const answersT = questions.find(it => it.questionNumber === selectedQuest)?.answers
+        setQuestion(questions.find(it => it.questionNumber === selectedQuest)?.question || '')
+        answersT && setAnswers(answersT)
+    }, [selectedQuest])
+
+    const handleAddQuestion = () => {
+        if (!question || !answers.filter(it => it.answer).length) return
+
+        const isHaveQuest = questions.some(it => it.questionNumber === selectedQuest)
+
+        if (isHaveQuest) {
+            setQuestions(questions.map(it => it.questionNumber === selectedQuest ? {...it, question, answers} : it))
+        } else {
+            setQuestions([...questions, {
+                question: question,
+                id: questions.length.toString(),
+                answers: answers.filter(it => it.answer),
+                questionNumber: (questions.length + 1).toString(),
+            }])
+        }
+
+        if (!isSameAnswer) setAnswers(getInitArrayAnswers())
+        setQuestion('')
+        setSelectedQuest('none')
+    }
+
+
     return (
         <div className={style.block}>
             <div className={style.questions_block}>
                 <Textarea value={question} onChange={setQuestion}/>
                 <button onClick={() => {
-                    if (!question && answers.filter(it => it.answer).length) return
-                    setQuestions([...questions, {
-                        question: question,
-                        id: questions.length.toString(),
-                        answers: answers.filter(it => it.answer),
-                        questionNumber: (questions.length + 1).toString(),
-                    }])
-                    setQuestion('')
-                    if (!isSameAnswer) setAnswers([{
-                        answer: '',
-                        id: Math.random().toString()
-                    }])
+                    handleAddQuestion()
                 }}>
-                    Добавить вопрос
+                    {questions.find(it => it.questionNumber === selectedQuest)?.question ? 'Сохранить' : 'Добавить'}
                 </button>
             </div>
-            <div className={style.answers_block}>
-                <Checkbox checked={isSameAnswer} onChange={setIsSameAnswer}/>
-                <div>
-                    {answers.map((item, index) => {
-                        return (
-                            <Input key={item.id}
-                                   value={item.answer}
-                                   label={`Ответ ${index + 1}`}
-                                   onChange={(val) => {
-                                       setAnswers(answers.map((it, idx) => {
-                                           return index === idx ? {...it, answer: val} : it
-                                       }))
-                                   }}
-                                   onBlur={(val) => {
-                                       val && answers.length === index + 1 && setAnswers([...answers, {
-                                           answer: '',
-                                           id: Math.random().toString()
-                                       }])
-                                   }}
-                            />
-                        )
-                    })}
-                </div>
-            </div>
+            <AnswersContainer answers={answers} setAnswers={setAnswers} isSameAnswer={isSameAnswer}
+                              setIsSameAnswer={setIsSameAnswer}/>
             <div>
-                <TestsList questions={questions}/>
+                {!!questions.filter(it => it.question).length &&
+                    <TestsList questions={questions} setSelectedQuest={setSelectedQuest}
+                               handleDeleteQuestion={handleDeleteQuestion}/>}
             </div>
         </div>
     )

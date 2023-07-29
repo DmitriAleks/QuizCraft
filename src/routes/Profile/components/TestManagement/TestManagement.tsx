@@ -39,7 +39,7 @@ export const TestManagement = (props:TestManagementPropsType) => {
 
 
     const testsList = testDataTestsList.map(it => {
-        return <TestItem id={it.id} title={it.name} onClick={()=>{
+        return <TestItem key={it.id} id={it.id} title={it.name} onClick={()=>{
             console.log('открыл тест')
         }}/>
     })
